@@ -1,1 +1,21 @@
-<p>recipe-edit works!</p>
+<div class="recipe-edit-container">
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="instructions">Instructions</label>
+    <input type="text" id="instructions" formControlName="instructions">
+  </div>
+  <div class="form-group">
+    <label for="ingredients">Ingredients</label>
+    <input type="text" id="ingredients" formControlName="ingredients">
+  </div>
+  <div class="form-group">
+    <label for="prepTime">Preparation Time</label>
+    <input type="number" id="prepTime" formControlName="prepTime">
+  </div>
+  <button type="submit">Update</button>
+</form>
+</div>

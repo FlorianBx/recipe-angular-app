@@ -1,8 +1,9 @@
 <div class="recipe-list-container">
   @for (recipe of recipes; track recipe.id) {
   <div class="recipe-list-card">
+    <button (click)="deleteRecipe(recipe.id)" class="recipe-list-delete"><p>X</p></button>
   <!-- <app-recipe-card [recipe]="recipe"></app-recipe-card> -->
-    <h3>{{ recipe.name }}</h3>
+    <h3><a [routerLink]="['/recipe-edit', recipe.id]">{{ recipe.name }}</a></h3>
     <p>{{ recipe.instructions }}</p>
     <ul>
     @for (ingredient of recipe.ingredients; track ingredient) {

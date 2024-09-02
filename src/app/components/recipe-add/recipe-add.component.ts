@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe.model';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -12,6 +13,8 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 })
 export class RecipeAddComponent {
 
+  constructor(private recipeService: RecipeService, private router: Router) { }
+
   recipeForm = new FormGroup({
     name: new FormControl('', Validators.required),
     instructions: new FormControl('', Validators.required),
@@ -19,9 +22,7 @@ export class RecipeAddComponent {
     prepTime: new FormControl('', Validators.required)
   });
 
-  constructor(private recipeService: RecipeService) { }
-
-  submit() {
+  onSubmit() {
     const recipe: Recipe = {
       id: this.recipeService.generateId(),
       name: this.recipeForm.value.name as string,
@@ -30,5 +31,6 @@ export class RecipeAddComponent {
       prepTime: Number(this.recipeForm.value.prepTime)
     }
     this.recipeService.addRecipe(recipe);
+    this.router.navigate(['/recipes']);
   }
 }

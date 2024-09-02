@@ -37,10 +37,23 @@ export class RecipeService {
     return this.recipes;
   }
 
+  getRecipeById(id: number) {
+    return this.recipes.find((recipe) => recipe.id === id);
+  }
+
   addRecipe(recipe: Recipe) {
     const ingredients = recipe.ingredients.toString().split(',');
     recipe.ingredients = ingredients;
     this.recipes.push(recipe);
     console.log(this.recipes);
+  }
+
+  editRecipe(recipe: Recipe) {
+    const index = this.recipes.findIndex((r) => r.id === recipe.id);
+    this.recipes[index] = recipe;
+  }
+
+  deleteRecipe(id: number) {
+    this.recipes = this.recipes.filter((recipe) => recipe.id !== id);
   }
 }

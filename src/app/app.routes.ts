@@ -7,7 +7,7 @@ import { RecipeAddComponent } from './components/recipe-add/recipe-add.component
 export const routes: Routes = [
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
   { path: 'recipes', component: RecipeListComponent },
-  { path: 'recipes/add', component: RecipeAddComponent },
-  { path: 'recipes/:id', component: RecipeDetailComponent },
-  { path: 'recipes/:id/edit', component: RecipeEditComponent }
+  { path: 'recipe/add', component: RecipeAddComponent },
+  { path: 'recipe/:id', component: RecipeDetailComponent },
+  { path: 'recipe-edit/:id', component: RecipeEditComponent }
 ];

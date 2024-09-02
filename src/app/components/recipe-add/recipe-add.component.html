@@ -1,5 +1,5 @@
 <div class="recipe-add-container">
-<form [formGroup]="recipeForm" (ngSubmit)="submit()">
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" id="name" formControlName="name">
