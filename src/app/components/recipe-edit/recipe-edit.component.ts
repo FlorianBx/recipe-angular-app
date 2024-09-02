@@ -65,5 +65,8 @@ export class RecipeEditComponent {
       this.recipeService.editRecipe(updatedRecipe);
       this.router.navigate(['/recipes']);
     }
+    else {
+      console.log(this.recipeForm.errors);
+    }
   }
 }

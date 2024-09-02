@@ -1,1 +1,11 @@
-<p>recipe-detail works!</p>
+<div>
+  @if (recipe) {
+    <h2>Recipe Detail</h2>
+    <p>{{ recipe.name }}</p>
+    <p>{{ recipe.instructions }}</p>
+    <p>{{ recipe.ingredients }}</p>
+    <p>{{ recipe.prepTime }}</p>
+    <button (click)="deleteRecipe()">Delete</button>
+    <button (click)="editRecipe()">Edit</button>
+  }
+</div>
