@@ -1,0 +1,17 @@
+<div class="recipe-list-container">
+  @for (recipe of recipes; track recipe.id) {
+  <div class="recipe-list-card">
+  <!-- <app-recipe-card [recipe]="recipe"></app-recipe-card> -->
+    <h3>{{ recipe.name }}</h3>
+    <p>{{ recipe.instructions }}</p>
+    <ul>
+    @for (ingredient of recipe.ingredients; track ingredient) {
+      <li>{{ ingredient }}</li>
+    }
+    </ul>
+    <p>{{ recipe.prepTime }} min</p>
+  </div>
+  } @empty {
+    <p>No recipes</p>
+  }
+</div>
