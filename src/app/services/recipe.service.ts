@@ -64,7 +64,7 @@ export class RecipeService {
         ingredients: recipe.ingredients
           .toString()
           .split(',')
-          .map((ing) => ing.trim()),
+          .map((ingredient) => ingredient.trim()),
       };
       return [...recipes, newRecipe];
     });
