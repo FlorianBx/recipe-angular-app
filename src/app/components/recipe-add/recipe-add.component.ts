@@ -1,12 +1,34 @@
 import { Component } from '@angular/core';
+import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from '../../models/recipe.model';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-add',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './recipe-add.component.html',
   styleUrl: './recipe-add.component.css'
 })
 export class RecipeAddComponent {
 
+  recipeForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    instructions: new FormControl('', Validators.required),
+    ingredients: new FormControl([''], Validators.required),
+    prepTime: new FormControl('', Validators.required)
+  });
+
+  constructor(private recipeService: RecipeService) { }
+
+  submit() {
+    const recipe: Recipe = {
+      id: this.recipeService.generateId(),
+      name: this.recipeForm.value.name as string,
+      instructions: this.recipeForm.value.instructions as string,
+      ingredients: this.recipeForm.value.ingredients as string[],
+      prepTime: Number(this.recipeForm.value.prepTime)
+    }
+    this.recipeService.addRecipe(recipe);
+  }
 }

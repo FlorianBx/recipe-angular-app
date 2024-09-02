@@ -29,7 +29,15 @@ export class RecipeService {
     },
   ];
 
+  generateId() {
+    return this.recipes.length + 1;
+  }
+
   getRecipes() {
     return this.recipes;
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
   }
 }
