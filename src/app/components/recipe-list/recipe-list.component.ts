@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { Recipe } from '../../models/recipe.model';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,17 +7,14 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './recipe-list.component.html',
-  styleUrl: './recipe-list.component.css'
+  styleUrl: './recipe-list.component.css',
 })
 export class RecipeListComponent {
-  recipes: Recipe[] = [];
+  recipes = this.recipeService.getRecipes();
 
-  constructor(recipeService: RecipeService) {
-    this.recipes = recipeService.getRecipes();
-  }
+  constructor(private recipeService: RecipeService) {}
 
   deleteRecipe(id: number) {
-    this.recipes = this.recipes.filter((recipe) => recipe.id !== id);
+    this.recipeService.deleteRecipe(id);
   }
-
 }
