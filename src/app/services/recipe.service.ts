@@ -1,35 +1,40 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  private recipesSignal = signal<Recipe[]>([
-    {
-      id: 1,
-      name: 'Pizza',
-      instructions: 'lorem ipsum dolor sit amet consectetur',
-      ingredients: ['Tomato', 'Mozzarella', 'Cheese'],
-      prepTime: 10,
-    },
-    {
-      id: 2,
-      name: 'Pasta',
-      instructions: 'lorem ipsum dolor sit amet consectetur',
-      ingredients: ['Tomato', 'Mozzarella', 'Cheese'],
-      prepTime: 10,
-    },
-    {
-      id: 3,
-      name: 'Salad',
-      instructions: 'lorem ipsum dolor sit amet consectetur',
-      ingredients: ['Tomato', 'Mozzarella', 'Cheese'],
-      prepTime: 10,
-    },
-  ]);
+  private recipes = signal<Recipe[]>(this.loadRecipes());
 
-  recipes = computed(() => this.recipesSignal());
+  private loadRecipes(): Recipe[] {
+    const savedRecipes = localStorage.getItem('recipes');
+    return savedRecipes
+      ? JSON.parse(savedRecipes)
+      : [
+          {
+            id: 1,
+            name: 'Pizza',
+            instructions: 'lorem ipsum dolor sit amet consectetur',
+            ingredients: ['Tomato', 'Mozzarella', 'Cheese'],
+            prepTime: 10,
+          },
+          {
+            id: 2,
+            name: 'Pasta',
+            instructions: 'lorem ipsum dolor sit amet consectetur',
+            ingredients: ['Tomato', 'Mozzarella', 'Cheese'],
+            prepTime: 10,
+          },
+          {
+            id: 3,
+            name: 'Salad',
+            instructions: 'lorem ipsum dolor sit amet consectetur',
+            ingredients: ['Tomato', 'Mozzarella', 'Cheese'],
+            prepTime: 10,
+          },
+        ];
+  }
 
   private generateId() {
     return this.recipes.length + 1;
@@ -40,8 +45,9 @@ export class RecipeService {
   }
 
   getRecipes() {
-    if (localStorage.getItem('recipes')) {
-      this.recipes = JSON.parse(localStorage.getItem('recipes')!);
+    const savedRecipes = localStorage.getItem('recipes');
+    if (savedRecipes) {
+      this.recipes.set(JSON.parse(savedRecipes));
     }
     return this.recipes;
   }
@@ -51,7 +57,7 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    this.recipesSignal.update((recipes) => {
+    this.recipes.update((recipes) => {
       const newRecipe = {
         ...recipe,
         id: this.generateId(),
@@ -72,7 +78,7 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number) {
-    this.recipesSignal.update((recipes) =>
+    this.recipes.update((recipes) =>
       recipes.filter((recipe) => recipe.id !== id),
     );
     this.saveRecipes();

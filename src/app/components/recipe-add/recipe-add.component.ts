@@ -24,7 +24,6 @@ export class RecipeAddComponent {
 
   onSubmit() {
     const recipe: Recipe = {
-      id: this.recipeService.generateId(),
       name: this.recipeForm.value.name as string,
       instructions: this.recipeForm.value.instructions as string,
       ingredients: this.recipeForm.value.ingredients as string[],
