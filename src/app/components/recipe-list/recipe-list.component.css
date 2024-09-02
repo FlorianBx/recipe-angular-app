@@ -14,13 +14,13 @@
 
 ul {
   display: flex;
-  gap: 16px;
+  gap: 6px;
   padding: 0;
 }
 
 li {
   list-style-type: none;
-  color: black;
+  color: white;
 }
 
 h3 {

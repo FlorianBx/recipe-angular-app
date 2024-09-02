@@ -38,6 +38,9 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
+    const ingredients = recipe.ingredients.toString().split(',');
+    recipe.ingredients = ingredients;
     this.recipes.push(recipe);
+    console.log(this.recipes);
   }
 }
